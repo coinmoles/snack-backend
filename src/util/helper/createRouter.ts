@@ -11,7 +11,7 @@ export const createRouter = async (dirName: string): Promise<Router> => {
     const routeFiles: string[] = await globPromise(`${dirName}/*/**/*{.js,.ts}`);
     await routeFiles.map(async (methodPath: string) => {
         const methodData: MethodData = await import(methodPath);
-
+        
         if (methodData.methodName === 'get') {
             router.get(methodData.methodParam, methodData.methodFunc);
         }

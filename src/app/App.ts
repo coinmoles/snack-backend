@@ -6,7 +6,7 @@ import { promisify } from "util";
 import { glob } from "glob";
 import { RouteData } from "../util/interface/RouteData";
 import { createRouter } from "../util/helper/createRouter";
-import { PORT } from "../../secret";
+import { PORT } from "../secret";
 
 const globPromise = promisify(glob);
 
@@ -30,4 +30,4 @@ class App extends Koa {
     }
 }
 
-export const App
+export { App }
