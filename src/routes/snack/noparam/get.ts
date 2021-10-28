@@ -13,7 +13,6 @@ const getFunc = async (ctx: Context, next: Next): Promise<void> => {
 
     const { year, month, day } = ctx.request.body;
     const date = DateTime.fromObject({ year, month, day }).toFormat("yyyyLLLdd")
-    console.log(date);
 
     ctx.response.status = 200
 }
