@@ -1,5 +1,6 @@
 import { Context, Next } from "koa";
 import { DateTime } from "luxon";
+import { dbRead } from "../../../util/dbRelated/SnackRepo";
 import { getValidate } from "./util/getValidate";
 
 const getFunc = async (ctx: Context, next: Next): Promise<void> => {
@@ -12,9 +13,26 @@ const getFunc = async (ctx: Context, next: Next): Promise<void> => {
     }
 
     const { year, month, day } = ctx.request.body;
-    const date = DateTime.fromObject({ year, month, day }).toFormat("yyyyLLLdd")
+    try {
+        const snackDatas = await dbRead({ year, month, day });
+        ctx.response.status = 200
+        ctx.response.body = snackDatas.map(snackData => {
+            return {
+                year: snackData.year,
+                month: snackData.month,
+                day: snackData.day,
+                snack: snackData.snack
+            }
+        });
+    } catch (err){
+        ctx.response.status = 500;
+        ctx.response.message = "Something Went Wrong"
+        await next();
+        return;
+    }
 
-    ctx.response.status = 200
+    await next();
+    return;
 }
 
 export const methodName = "get";

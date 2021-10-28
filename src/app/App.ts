@@ -26,7 +26,9 @@ class App extends Koa {
             this.router.use(routeData.route, router.routes());
         });
 
-        this.listen(PORT);
+        await this.listen(PORT);
+
+        console.log("The App is Running!")
     }
 }
 
