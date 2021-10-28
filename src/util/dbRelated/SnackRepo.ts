@@ -2,7 +2,7 @@ import { Document, FilterQuery, Query, Types } from "mongoose";
 import { SnackModel } from "./SnackModel";
 import { SnackData } from "../interface/SnackData";
 
-const validateId = (id: string): boolean => {
+export const validateId = (id: string): boolean => {
     if (!Types.ObjectId.isValid(id)) {
         throw new Error('id invalid');
     }
@@ -10,9 +10,9 @@ const validateId = (id: string): boolean => {
     return true;
 }
 
-const create = async (data: SnackData | SnackData[]): Promise<Document> => {
+export const dbCreate = async (data: SnackData | SnackData[]): Promise<Document> => {
     try {
-        
+
         const snackData = new SnackModel(data);
         return snackData.save();
     } catch (err) {
@@ -20,7 +20,7 @@ const create = async (data: SnackData | SnackData[]): Promise<Document> => {
     }
 }
 
-const read = async (filter?: FilterQuery<SnackData>): Promise<SnackData[]> => {
+export const dbRead = async (filter?: FilterQuery<SnackData>): Promise<SnackData[]> => {
     try {
         if (filter === undefined) 
             return SnackModel.find();
@@ -31,7 +31,7 @@ const read = async (filter?: FilterQuery<SnackData>): Promise<SnackData[]> => {
     }
 }
 
-const readById = async (id: string): Promise<Document | null> => {
+export const dbReadById = async (id: string): Promise<Document | null> => {
     try {
         validateId(id);
 
@@ -41,7 +41,7 @@ const readById = async (id: string): Promise<Document | null> => {
     }
 }
 
-const update = async (filter: FilterQuery<SnackData>, data: SnackData): Promise<SnackData | null> => {
+export const dbUpdate = async (filter: FilterQuery<SnackData>, data: SnackData): Promise<SnackData | null> => {
     try {
         return SnackModel.findOneAndUpdate(filter, { $set: data })
     } catch (err) {
@@ -49,7 +49,7 @@ const update = async (filter: FilterQuery<SnackData>, data: SnackData): Promise<
     }
 }
 
-const updateById = async (id : string, data: SnackData): Promise<Document | null> => {
+export const dbUpdateById = async (id : string, data: SnackData): Promise<Document | null> => {
     try {
         validateId(id);
 
@@ -59,7 +59,7 @@ const updateById = async (id : string, data: SnackData): Promise<Document | null
     }
 }
 
-const remove = async (filter?: FilterQuery<SnackData>): Promise<void> => {
+export const dbRemove = async (filter?: FilterQuery<SnackData>): Promise<void> => {
     try {
         await SnackModel.deleteMany(filter);
     } catch (err) {
@@ -67,7 +67,7 @@ const remove = async (filter?: FilterQuery<SnackData>): Promise<void> => {
     }
 }
 
-const removeById = async (id: string): Promise<Document | null> => {
+export const dbRemoveById = async (id: string): Promise<Document | null> => {
     try {
         validateId(id);
 
@@ -76,13 +76,3 @@ const removeById = async (id: string): Promise<Document | null> => {
         throw err;
     }
 }
-
-export default {
-    create,
-    read,
-    readById,
-    update,
-    updateById,
-    remove,
-    removeById
-};
