@@ -1,4 +1,6 @@
 export interface SnackData {
-    dateText: string;
-    snackText: string;
+    year: number
+    month: number
+    day: number
+    snack: string
 }

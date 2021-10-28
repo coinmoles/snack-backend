@@ -1,8 +1,8 @@
 import { Rectangle } from "tesseract.js";
-import { SnackData } from "../interface/SnackData";
+import { SnackText } from "../interface/SnackText";
 import { ocr } from "./ocr";
 
-export const ocrSnack = async (imgUrl: string, dateRectangle: Rectangle, snackRectangle: Rectangle): Promise<SnackData> => {
+export const ocrSnack = async (imgUrl: string, dateRectangle: Rectangle, snackRectangle: Rectangle): Promise<SnackText> => {
     const dateText = await ocr(imgUrl, dateRectangle);
     const snackText = await ocr(imgUrl, snackRectangle);
 
