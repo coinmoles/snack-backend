@@ -1,4 +1,5 @@
 import { Context, Next } from "koa";
+import { withAuth } from "../../../util/helper/withAuth";
 import { imageToSnack } from "../../../util/imageToSnack";
 import { postValidate } from "./util/postValidate";
 
@@ -28,4 +29,4 @@ const postFunc = async (ctx: Context, next: Next): Promise<void> => {
 
 export const methodName = "post";
 export const methodParam = "/";
-export const methodFunc = postFunc
+export const methodFunc = withAuth(postFunc);

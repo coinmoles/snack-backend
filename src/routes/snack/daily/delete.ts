@@ -1,5 +1,6 @@
 import { Context, Next } from "koa";
 import { dbRemove } from "../../../util/dbRelated/SnackRepo";
+import { withAuth } from "../../../util/helper/withAuth";
 import { deleteValidate } from "./util/deleteValidate";
 
 const deleteFunc = async (ctx: Context, next: Next): Promise<void> => {
@@ -28,4 +29,4 @@ const deleteFunc = async (ctx: Context, next: Next): Promise<void> => {
 
 export const methodName = "delete";
 export const methodParam = "/daily";
-export const methodFunc = deleteFunc;
+export const methodFunc = withAuth(deleteFunc);
