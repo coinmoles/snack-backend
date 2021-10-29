@@ -1,5 +1,4 @@
 import { Context, Next } from "koa";
-import { dbRead } from "../../../util/dbRelated/SnackRepo";
 import { imageToSnack } from "../../../util/imageToSnack";
 import { postValidate } from "./util/postValidate";
 
@@ -29,4 +28,4 @@ const postFunc = async (ctx: Context, next: Next): Promise<void> => {
 
 export const methodName = "post";
 export const methodParam = "/";
-export { postFunc as methodFunc };
+export const methodFunc = postFunc

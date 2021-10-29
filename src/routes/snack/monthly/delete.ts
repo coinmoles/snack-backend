@@ -1,5 +1,5 @@
 import { Context, Next } from "koa";
-import { dbRead, dbRemove } from "../../../util/dbRelated/SnackRepo";
+import { dbRemove } from "../../../util/dbRelated/SnackRepo";
 import { deleteValidate } from "./util/deleteValidate";
 
 const deleteFunc = async (ctx: Context, next: Next): Promise<void> => {
@@ -11,9 +11,9 @@ const deleteFunc = async (ctx: Context, next: Next): Promise<void> => {
         return;
     }
 
-    const { year, month, day } = ctx.request.body;
+    const { year, month } = ctx.request.body;
     try {
-        const snackDatas = await dbRemove({ year, month, day });
+        const snackDatas = await dbRemove({ year, month });
         ctx.response.status = 204
     } catch (err){
         ctx.response.status = 500;
@@ -27,5 +27,5 @@ const deleteFunc = async (ctx: Context, next: Next): Promise<void> => {
 }
 
 export const methodName = "delete";
-export const methodParam = "/";
-export { deleteFunc as methodFunc };
+export const methodParam = "/monthly";
+export const methodFunc = deleteFunc

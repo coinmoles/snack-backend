@@ -11,9 +11,9 @@ const getFunc = async (ctx: Context, next: Next): Promise<void> => {
         return;
     }
 
-    const { year, month, day } = ctx.request.body;
+    const { year } = ctx.request.body;
     try {
-        const snackDatas = await dbRead({ year, month, day });
+        const snackDatas = await dbRead({ year });
         ctx.response.status = 200
         ctx.response.body = snackDatas.map(snackData => {
             return {
@@ -35,5 +35,5 @@ const getFunc = async (ctx: Context, next: Next): Promise<void> => {
 }
 
 export const methodName = "get";
-export const methodParam = "/";
-export { getFunc as methodFunc };
+export const methodParam = "/yearly";
+export const methodFunc = getFunc
