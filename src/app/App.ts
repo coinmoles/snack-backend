@@ -6,7 +6,6 @@ import { promisify } from "util";
 import { glob } from "glob";
 import { RouteData } from "../util/interface/RouteData";
 import { createRouter } from "../util/helper/createRouter";
-import { PORT } from "../secret";
 
 const globPromise = promisify(glob);
 
@@ -26,7 +25,7 @@ class App extends Koa {
             this.router.use(routeData.route, router.routes());
         }
 
-        await this.listen(PORT);
+        await this.listen(process.env.PORT!);
 
         console.log("The App is Now Running!");   
     }

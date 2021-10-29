@@ -1,8 +1,7 @@
 import mongoose, { Model } from "mongoose";
-import { DB_CONNECTION_URI } from "../../secret";
 import { SnackData } from "../interface/SnackData";
 
-const connection = mongoose.createConnection(DB_CONNECTION_URI);
+const connection = mongoose.createConnection(process.env.DB_CONNECTION_URI!);
 
 const SnackDataSchema = new mongoose.Schema({
     year: {
