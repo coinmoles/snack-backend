@@ -1,4 +1,3 @@
-import { DateTime } from "luxon";
 import { ConfiguredRectangle } from "../interface/ConfiguredRectangle";
 import { configureRectangles } from "./configureRectangles";
 import { extractYearAndMonth } from "./extractYearAndMonth";

@@ -44,9 +44,9 @@ img_url = sys.argv[1]
 # img_url = "https://scontent-ssn1-1.xx.fbcdn.net/v/t1.6435-9/242828923_422489069388745_426705476921744685_n.jpg?_nc_cat=105&ccb=1-5&_nc_sid=825194&_nc_ohc=_NaakK4gP0wAX8kXM7E&_nc_ht=scontent-ssn1-1.xx&oh=906de17973fde38eacaf8d423c8e9044&oe=61A0478B"
 img = img_from_url(img_url)
 img_bin = to_bin(img)
-img_dilate = dilate_img(img_bin)
-line = find_line(img_dilate)
-rectangle = get_rectangle(line)
+line = find_line(img_bin)
+line_dilate = dilate_img(line)
+rectangle = get_rectangle(line_dilate)
 
 for (x, y, w, h, area) in rectangle[2:]:
     print(json.dumps({
