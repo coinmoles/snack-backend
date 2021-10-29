@@ -18,17 +18,17 @@ class App extends Koa {
         this.use(bodyParser());
         this.use(this.router.routes()); 
         
-        const routeFiles: string[] = await globPromise(`${__dirname}/../routes/**/index{.js,.ts}`);
-        await routeFiles.map(async (routerPath: string) => {
+        const routeFiles = await globPromise(`${__dirname}/../routes/**/index{.js,.ts}`);
+        for (const routerPath of routeFiles){
             const routeData: RouteData = await import(routerPath);
             const router = await createRouter(`${routerPath}/..`);
             
             this.router.use(routeData.route, router.routes());
-        });
+        }
 
         await this.listen(PORT);
 
-        console.log("The App is Running!")
+        console.log("The App is Now Running!");   
     }
 }
 

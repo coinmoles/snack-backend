@@ -7,7 +7,7 @@ import { getTitle } from "./getTitle";
 import { postSnackData } from "./postSnackData";
 import { tableDetect } from "./tableDetect";
 
-export const snackImage = async (imgUrl: string): Promise<void> => {
+export const imageToSnack = async (imgUrl: string): Promise<void> => {
     const title = await getTitle(imgUrl);
     const { year, month } = extractYearAndMonth(title);
 
