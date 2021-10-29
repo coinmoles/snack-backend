@@ -24,7 +24,7 @@
   "scripts": {
     "start:dev": "NODE_ENV=development ts-node-dev --respawn --transfile-only src/index.ts",
     "start:build": "NODE_ENV=proudction node build/index.js",
-    "start": "NODE_ENV=production ts-node src/index.ts",
-    "build": "tsc-watch --onSuccess 'node ./dist/index.js'"
+    "build": "NODE_ENV=production ts-node src/index.ts",
+    "start": "tsc-watch --onSuccess 'node ./dist/index.js'"
   }
 }
