@@ -16,7 +16,7 @@ class App extends Koa {
         this.use(logger());
         this.use(bodyParser());
         this.use(this.router.routes()); 
-        
+
         const routeFiles = await globPromise(`${__dirname}/../routes/**/index{.js,.ts}`);
         for (const routerPath of routeFiles){
             const routeData: RouteData = await import(routerPath);
