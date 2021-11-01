@@ -2,6 +2,7 @@ import Koa from "koa";
 import logger from "koa-logger"
 import bodyParser from "koa-bodyparser";
 import Router from "koa-router";
+import cors from "@koa/cors";
 import { promisify } from "util";
 import { glob } from "glob";
 import { RouteData } from "../util/interface/RouteData";
@@ -15,7 +16,8 @@ class App extends Koa {
     public async start(): Promise<void> {
         this.use(logger());
         this.use(bodyParser());
-        this.use(this.router.routes()); 
+        this.use(cors())
+        this.use(this.router.routes());
 
         const routeFiles = await globPromise(`${__dirname}/../routes/**/index{.js,.ts}`);
         for (const routerPath of routeFiles){
