@@ -1,6 +1,6 @@
 import { Context, Next } from "koa";
+import { dbCreate } from "../../../util/dbRelated/SnackRepo";
 import { withAuth } from "../../../util/helper/withAuth";
-import { imageToSnack } from "../../../util/imageToSnack";
 import { postValidate } from "./util/postValidate";
 
 const postFunc = async (ctx: Context, next: Next): Promise<void> => {
@@ -12,9 +12,9 @@ const postFunc = async (ctx: Context, next: Next): Promise<void> => {
         return;
     }
 
-    const { imgUrl } = ctx.request.body;
+    const { year, month, day, snack } = ctx.request.body;
     try {
-        await imageToSnack(imgUrl);
+        await dbCreate({ year, month, day, snack });
         ctx.response.status = 201;
     } catch (err){
         ctx.response.status = 500;
@@ -28,5 +28,5 @@ const postFunc = async (ctx: Context, next: Next): Promise<void> => {
 }
 
 export const methodName = "post";
-export const methodParam = "/";
+export const methodParam = "/daily";
 export const methodFunc = withAuth(postFunc);
